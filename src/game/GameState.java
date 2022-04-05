@@ -72,7 +72,7 @@ public class GameState {
 		int intX = (int)path.locatePosition(percentageTraveled).getX();
 		int intY = (int)path.locatePosition(percentageTraveled).getY();
 		g.setColor(Color.BLUE);
-		g.fillRect(intX, intY, 20, 20);
+		g.fillOval(intX, intY, 20, 20);
 	}
 
 	/**

@@ -68,10 +68,10 @@ public class Path {
 	public void paint(Graphics g) {
 		g.setColor(Color.GREEN);
 
-		for (int i = 0; i < points.length; i++) {
+		for (int i = 1; i < points.length; i++) {
 			int x = (int) points[i].getX();
 			int y = (int) points[i].getY();
-			g.fillOval(x, y, 10, 10);
+			g.drawLine((int)(points[i-1].getX()), (int)(points[i-1].getY()), (int)(points[i].getX()), (int)(points[i].getY()));
 		}
 	}
 
