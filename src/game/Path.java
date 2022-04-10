@@ -68,8 +68,14 @@ public class Path {
 	public void paint(Graphics g) {
 		g.setColor(Color.GREEN);
 
+<<<<<<< HEAD
 
 		for (int i = 1; i < points.length; i++) {
+=======
+		for (int i = 1; i < points.length; i++) {
+			int x = (int) points[i].getX();
+			int y = (int) points[i].getY();
+>>>>>>> b88800ae508cf672745b76a1edf48ef713efd8b0
 			g.drawLine((int)(points[i-1].getX()), (int)(points[i-1].getY()), (int)(points[i].getX()), (int)(points[i].getY()));
 		}
 	}

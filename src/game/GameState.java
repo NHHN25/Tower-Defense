@@ -70,11 +70,19 @@ public class GameState {
 
 		path.paint(g);
 
+<<<<<<< HEAD
 //		// Draw the ball
 //		int intX = (int) path.locatePosition(percentageTraveled).getX();
 //		int intY = (int) path.locatePosition(percentageTraveled).getY();
 //		g.setColor(Color.BLUE);
 //		g.fillRect(intX, intY, 20, 20);
+=======
+		// Draw the ball
+		int intX = (int)path.locatePosition(percentageTraveled).getX();
+		int intY = (int)path.locatePosition(percentageTraveled).getY();
+		g.setColor(Color.BLUE);
+		g.fillOval(intX, intY, 20, 20);
+>>>>>>> b88800ae508cf672745b76a1edf48ef713efd8b0
 	}
 
 	/**
