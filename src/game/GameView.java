@@ -4,6 +4,7 @@ package game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,24 +13,25 @@ public class GameView extends JPanel {
 	// Fields
 
 	private GameState state;
+	private GameControl control;
 
 	// Constructor
 
 	/** Please add a contract! */
 
-	public GameView(GameState s) {
+	public GameView(GameState state, GameControl control) {
 		System.out.println("GameView constructor");
 
 		// Keep track of the game's state object.
-
-		state = s;
+		this.control = control;
+		this.state = state;
 
 		// Build the frame and the panel, then put 'this' object in it.
 		// First, use inherited methods to set a new pixel size for this object.
 
 		this.setMinimumSize(new Dimension(600, 600));
-		this.setMaximumSize(new Dimension(600, 600));
-		this.setPreferredSize(new Dimension(600, 600));
+		this.setMaximumSize(new Dimension(700, 600));
+		this.setPreferredSize(new Dimension(700, 600));
 
 		// Make the JFrame, ask it to exit the application when closed.
 
@@ -49,7 +51,13 @@ public class GameView extends JPanel {
 	/** Please add a contract! */
 
 	public void paint(Graphics g) {
-		state.drawAll(g); // We'll do all the work in drawAll in this checkpoint
+		state.drawAll(g, this); // We'll do all the work in drawAll in this checkpoint
+	}
+	
+	public void drawCenteredImage (Graphics g, String name, int x, int y) {
+		BufferedImage img = control.loadImage(name);
+		g.drawImage(img, x-img.getWidth()/2, y-img.getHeight()/2, null);
+		
 	}
 
 }

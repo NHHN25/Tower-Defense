@@ -15,7 +15,11 @@ public class GameState {
 	// Fields
 
 	private Path path;
-	private BufferedImage background;
+	private GameControl control;
+	private Animatable background;
+	private Animatable menu;
+	private Animatable snail;
+
 	private double percentageTraveled;
 
 	private double squareAngle;
@@ -24,8 +28,13 @@ public class GameState {
 
 	// Constructor
 
-	public GameState() {
+	public GameState(GameControl control) {
 		System.out.println("GameState constructor");
+		
+		this.background = new Background();
+		this.menu = new Menu();
+		this.snail = new Snail(this, percentageTraveled);
+		this.control = control;
 
 		// Build our path
 		Scanner sc;
@@ -40,15 +49,6 @@ public class GameState {
 		// Initialized percentage traveled
 		percentageTraveled = 0.0;
 
-		// Load the background jpg
-
-		try {
-			ClassLoader loader = this.getClass().getClassLoader();
-			InputStream is = loader.getResourceAsStream("resources/path_2.jpg");
-			background = javax.imageio.ImageIO.read(is);
-		} catch (IOException e) {
-			System.out.println("Unable to load background.");
-		}
 	}
 
 	// Function to return a path object
@@ -59,28 +59,34 @@ public class GameState {
 
 	// Function to draw everything
 
-	public void drawAll(Graphics g) {
+	public void drawAll(Graphics g, GameView view) {
 		// Draw the background
 
-		g.drawImage(background, 0, 0, null);
+		background.draw(g, view);
+		menu.draw(g, view);
+		snail.draw(g, view);
 
 		// Draw the path
 
 		path.paint(g);
 
-		// Draw the ball
-		int intX = (int)path.locatePosition(percentageTraveled).getX();
-		int intY = (int)path.locatePosition(percentageTraveled).getY();
-		g.setColor(Color.BLUE);
-		g.fillRect(intX, intY, 20, 20);
+//		// Draw the ball
+//		int intX = (int) path.locatePosition(percentageTraveled).getX();
+//		int intY = (int) path.locatePosition(percentageTraveled).getY();
+//		g.setColor(Color.BLUE);
+//		g.fillRect(intX, intY, 20, 20);
 	}
 
 	/**
 	 * This method updates every frame of the game.
 	 */
-	public void updateAll() {
+	public void updateAll(double elapsedTime) {
 		percentageTraveled += 0.001;
 		if (percentageTraveled > 1.0)
 			percentageTraveled = 0.0;
+		
+		background.update(elapsedTime);
+		menu.update(elapsedTime);
+		snail.update(elapsedTime);
 	}
 }

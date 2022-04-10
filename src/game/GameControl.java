@@ -10,9 +10,12 @@ package game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 import javax.swing.Timer;
 
 import javax.swing.SwingUtilities;
@@ -52,17 +55,47 @@ public class GameControl implements Runnable, ActionListener {
 
 		// Set up game objects.
 
-		state = new GameState();
-		view = new GameView(state);
-		
-		//Initialize a timer
+		state = new GameState(this);
+		view = new GameView(state, this);
+
+		// Initialize a timer
 		timer = new Timer(16, this);
 		timer.start();
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		state.updateAll();
+		state.updateAll(1.0/60.0);
 		view.repaint();
+	}
+
+	/**
+	 * This method takes a String and return a BufferedImage object. It will save the image into a Map and retrieve the image from the Map the second time the function is called
+	 * @param s
+	 * @return a BufferedImage object
+	 */
+	public BufferedImage loadImage(String s) {
+		// Initialize the image cache
+		Map<String, BufferedImage> images = new HashMap<String, BufferedImage>();
+		ClassLoader loader = this.getClass().getClassLoader();
+		InputStream is = loader.getResourceAsStream(s);
+		BufferedImage image = null;
+		try {
+			image = javax.imageio.ImageIO.read(is);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Check if the image exists in the map or not
+		if (images.containsKey(s))
+			image = images.get(s);
+		
+		//If the image doesn't exists yet, put it in the map
+		else images.put(s, image);
+	
+		return image;
+
+		
 	}
 
 }
