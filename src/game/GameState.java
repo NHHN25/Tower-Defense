@@ -3,27 +3,32 @@ package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Timer;
 
-public class GameState {
+public class GameState implements MouseListener, MouseMotionListener{
 	// Fields
-
+	//Add lifeCounter and boolean isGameOver + getter/setter for counters + List of Animatables (helper methods addAnimatable + removeAnimatable)
 	private Path path;
 	private GameControl control;
-	private Animatable background;
-	private Animatable menu;
-	private Animatable snail;
-
-	private double percentageTraveled;
-
-	private double squareAngle;
-
+	private int lives;
+	
+	private List<Animatable> animatables;
+	private List<Animatable> toAdd; //Animatables to be added after updating animatables
+	private List<Animatable> toRemove; //Animatables to be remove after updating animatables
+	
+	private int mouseX, mouseY;
+	private boolean mouseClicked;
 	/* Contracts needed! */
 
 	// Constructor
@@ -31,9 +36,16 @@ public class GameState {
 	public GameState(GameControl control) {
 		System.out.println("GameState constructor");
 		
-		this.background = new Background();
-		this.menu = new Menu();
-		this.snail = new Snail(this, percentageTraveled);
+		//Initialize lives
+		lives = 20;
+		
+		//Build animatable list
+		animatables = new ArrayList<Animatable>();
+		toAdd = new ArrayList<Animatable>();
+		toRemove = new ArrayList<Animatable>();
+
+
+		
 		this.control = control;
 
 		// Build our path
@@ -46,8 +58,6 @@ public class GameState {
 			System.out.println(e1);
 		}
 
-		// Initialized percentage traveled
-		percentageTraveled = 0.0;
 
 	}
 
@@ -62,9 +72,8 @@ public class GameState {
 	public void drawAll(Graphics g, GameView view) {
 		// Draw the background
 
-		background.draw(g, view);
-		menu.draw(g, view);
-		snail.draw(g, view);
+		for (Animatable a : animatables)
+			a.draw(g, view);
 
 		// Draw the path
 
@@ -83,12 +92,114 @@ public class GameState {
 	 * This method updates every frame of the game.
 	 */
 	public void updateAll(double elapsedTime) {
-		percentageTraveled += 0.001;
-		if (percentageTraveled > 1.0)
-			percentageTraveled = 0.0;
 		
-		background.update(elapsedTime);
-		menu.update(elapsedTime);
-		snail.update(elapsedTime);
+		//Loop through all animatables
+		for (Animatable a : animatables) {
+			a.update(elapsedTime);
+		}
+		
+		//Add and remove animatables from the main animatable list
+		animatables.removeAll(toRemove);
+		animatables.addAll(toAdd);
+		
+		
+		//Remove all animatables from placeholder list
+		toAdd.clear();
+		toRemove.clear();
+		
+		//Clear mouse click
+		mouseClicked = false;
+		
+		//Generate random enemies
+		if (Math.random() < 0.1)
+			animatables.add(new EnemySnail(this));
+		
+		if (Math.random() < 0.025)
+			animatables.add(new EnemySCargo(this));
+		
+	}
+	
+	/**
+	 * Get the remaining lives
+	 * @return lives
+	 */
+	public int getLives() {
+		return lives;
+	}
+	
+	/**
+	 * Modifies the current lives  
+	 * @param lives
+	 */
+	public void changeLives (int amount) {
+		lives = lives + amount;
+	}
+	
+	public int getMouseX() {
+		return mouseX;
+	}
+	
+	public int getMouseY() {
+		return mouseY;
+	}
+	
+	public boolean getMouseClicked() {
+		return mouseClicked;
+	}
+	
+	public void consumeClick() {
+		mouseClicked = false;
+	}
+	
+	public void addAnimatable (Animatable a) {
+		toAdd.add(a);
+	}
+	
+	public void removeAnimatable (Animatable a) {
+		toRemove.add(a);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		mouseX = e.getX();
+		mouseY = e.getY();
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		mouseClicked = true;
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

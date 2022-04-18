@@ -26,6 +26,7 @@ public class GameControl implements Runnable, ActionListener {
 	private GameView view;
 	private GameState state;
 	private Timer timer;
+	private Map<String, BufferedImage> images;
 
 	// Constructor
 
@@ -52,12 +53,23 @@ public class GameControl implements Runnable, ActionListener {
 	 */
 	public void run() {
 		System.out.println("Hey -- I'm the GUI thread executing this code.");
+		
+		this.images = new HashMap<String, BufferedImage>();
+
 
 		// Set up game objects.
 
 		state = new GameState(this);
 		view = new GameView(state, this);
-
+		
+		//Build background and menu
+		state.addAnimatable(new Background());
+		state.addAnimatable(new Menu(this, state));
+		
+		//Add mouse listeners
+		view.addMouseListener(state);
+		view.addMouseMotionListener(state);
+		
 		// Initialize a timer
 		timer = new Timer(16, this);
 		timer.start();
@@ -75,7 +87,6 @@ public class GameControl implements Runnable, ActionListener {
 	 */
 	public BufferedImage loadImage(String s) {
 		// Initialize the image cache
-		Map<String, BufferedImage> images = new HashMap<String, BufferedImage>();
 		ClassLoader loader = this.getClass().getClassLoader();
 		InputStream is = loader.getResourceAsStream(s);
 		BufferedImage image = null;
