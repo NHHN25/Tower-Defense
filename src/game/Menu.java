@@ -3,7 +3,7 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Menu extends Effects {
+public class Menu extends Effect {
 	
 	private GameControl control;
 	private GameState state;
@@ -29,8 +29,10 @@ public class Menu extends Effects {
 		g.setColor(Color.BLACK);
 		g.drawString("Money left: " + state.getMoney(), 610, 125);
 		
+		//Draw Salt tower on menu
 		state.addAnimatable(new TowerSaltMenu(state, 650, 200));
 		
+		//Draw Money
 		g.setColor(Color.BLACK);
 		g.drawString("Cost: 50", 630, 250);
 		

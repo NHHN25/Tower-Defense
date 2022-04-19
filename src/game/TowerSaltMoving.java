@@ -15,9 +15,14 @@ public class TowerSaltMoving extends Tower {
 		// TODO Auto-generated method stub
 		this.x = state.getMouseX();
 		this.y = state.getMouseY();
-
+		
+		//Check mouse clicked or not
 		if (state.getMouseClicked()) {
-			if (state.getMoney() >= 50) {
+			
+			//Check if player have enough money or not
+			if (state.getMoney() >= 50 && x < 600) {
+				
+				//Consume the click, add the salt tower to the ArrayList, remove the moving tower and deduct money
 				state.consumeClick();
 				state.addAnimatable(new TowerSalt(state, x, y));
 				state.removeAnimatable(this);

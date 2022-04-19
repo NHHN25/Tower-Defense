@@ -16,6 +16,8 @@ public class EnemySnail extends Enemy
 		// TODO Auto-generated method stub
 		percentageTraveled += 0.0075;
 		if (percentageTraveled > 1.0) {
+			
+			//If reach the end, remove from list and deduct life
 			state.removeAnimatable(this);
 			state.changeLives(-1);
 		}

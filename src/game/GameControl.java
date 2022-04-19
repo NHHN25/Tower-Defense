@@ -3,7 +3,7 @@
  * for the game, including creation of state and view classes, listener creation,
  * timers, game start and game over logic, etc.
  * 
- * @author Peter Jensen (add your name if you make changes)
+ * @author Nam Nguyen (add your name if you make changes)
  * @version Spring 2022
  */
 package game;
@@ -79,8 +79,6 @@ public class GameControl implements Runnable, ActionListener {
 		state.updateAll(1.0/60.0);
 		view.repaint();
 		
-//		if (state.getGameOver() == true)
-//			state.updateAll(0);
 	}
 
 	/**

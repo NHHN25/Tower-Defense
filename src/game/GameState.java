@@ -95,6 +95,10 @@ public class GameState implements MouseListener, MouseMotionListener{
 	public void updateAll(double elapsedTime) {
 		//Loop through all animatables
 		for (Animatable a : animatables) {
+			//Stop the game if out of lives
+			if (lives == 0)
+				break;
+			else
 			a.update(elapsedTime);
 		}
 		

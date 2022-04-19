@@ -15,6 +15,7 @@ public class EnemySCargo extends Enemy
 		// TODO Auto-generated method stub
 		percentageTraveled += 0.0115;
 		if (percentageTraveled > 1.0) {
+			//If reach the end, remove from list and deduct life
 			state.removeAnimatable(this);
 			state.changeLives(-1);
 		}
@@ -32,7 +33,7 @@ public class EnemySCargo extends Enemy
 		int intX = (int) this.getLocation().getX();
 		int intY = (int) this.getLocation().getY();
 		
-		//Draw the snail
+		//Draw the SCargo
 		view.drawCenteredImage(g, "resources/scargo.png", intX, intY);
 	}
 	

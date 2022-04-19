@@ -2,7 +2,7 @@ package game;
 
 import java.awt.Graphics;
 
-public class Background extends Effects {
+public class Background extends Effect {
 	
 	public void update(double timeElapsed) {
 
