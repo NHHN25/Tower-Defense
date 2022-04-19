@@ -18,6 +18,7 @@ public class Menu extends Effect {
 	}
 
 	public void draw(Graphics g, GameView view) {
+		g.clearRect(600, 0, 100, 600);
 		g.setColor(Color.BLACK);
 		g.drawString("Menu", 640, 50);
 		
