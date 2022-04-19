@@ -21,13 +21,13 @@ public class EnemySnail extends Enemy
 		}
 		
 		//Split Snail into half
-		updateCount++;
-		if (updateCount == 30) {
-			EnemySnail s = new EnemySnail(state);
-			s.percentageTraveled = percentageTraveled - 0.01;
-			s.updateCount = 60;
-			state.addAnimatable(s);
-		}
+//		updateCount++;
+//		if (updateCount == 30) {
+//			EnemySnail s = new EnemySnail(state);
+//			s.percentageTraveled = percentageTraveled - 0.01;
+//			s.updateCount = 60;
+//			state.addAnimatable(s);
+//		}
 
 		
 	}

@@ -27,8 +27,8 @@ public class GameState implements MouseListener, MouseMotionListener{
 	private List<Animatable> toAdd; //Animatables to be added after updating animatables
 	private List<Animatable> toRemove; //Animatables to be remove after updating animatables
 	
-	private int frameCount, mouseX, mouseY;
-	private boolean mouseClicked;
+	private int frameCount, mouseX, mouseY, money;
+	private boolean mouseClicked, isGameOver;
 	/* Contracts needed! */
 
 	// Constructor
@@ -36,8 +36,9 @@ public class GameState implements MouseListener, MouseMotionListener{
 	public GameState(GameControl control) {
 		System.out.println("GameState constructor");
 		
-		//Initialize lives
-		lives = 20;
+		//Initialize lives and money
+		money = 200;
+		lives = 5;
 		
 		//Build animatable list
 		animatables = new ArrayList<Animatable>();
@@ -92,7 +93,6 @@ public class GameState implements MouseListener, MouseMotionListener{
 	 * This method updates every frame of the game.
 	 */
 	public void updateAll(double elapsedTime) {
-		
 		//Loop through all animatables
 		for (Animatable a : animatables) {
 			a.update(elapsedTime);
@@ -111,7 +111,7 @@ public class GameState implements MouseListener, MouseMotionListener{
 		
 		
 		//Clear mouse click
-		mouseClicked = false;
+//		mouseClicked = false;
 		
 		//Generate enemies systematically
 		if (frameCount == 10)
@@ -125,6 +125,26 @@ public class GameState implements MouseListener, MouseMotionListener{
 			frameCount = 0;
 		
 		frameCount++;
+		
+		if (lives == 0)
+			isGameOver = true;
+		
+	}
+	
+	/**
+	 * Get the remaining money
+	 * @return int money
+	 */
+	public int getMoney() {
+		return money;
+	}
+	
+	/**
+	 * Modifies the current money  
+	 * @param int amount to change
+	 */
+	public void changeMoney (int amount) {
+		money = money + amount;
 	}
 	
 	/**
@@ -142,7 +162,6 @@ public class GameState implements MouseListener, MouseMotionListener{
 	public void changeLives (int amount) {
 		lives = lives + amount;
 	}
-	
 	/**
 	 * Get X coordinate of mouse
 	 * @return int mouseX
@@ -161,10 +180,18 @@ public class GameState implements MouseListener, MouseMotionListener{
 	
 	/**
 	 * Get status of mouse click
-	 * @return boolean mouseClicked
+	 * @return True or False
 	 */
 	public boolean getMouseClicked() {
 		return mouseClicked;
+	}
+	
+	/**
+	 * Return whether the game is over or not
+	 * @return True or False
+	 */
+	public boolean getGameOver() {
+		return isGameOver;
 	}
 	
 	/**

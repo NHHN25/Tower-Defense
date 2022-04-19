@@ -2,12 +2,11 @@ package game;
 
 import java.awt.Graphics;
 
-public class TowerSaltMoving extends Tower 
-{
+public class TowerSaltMoving extends Tower {
 
 	public TowerSaltMoving(GameState state, int x, int y) {
 		super(state, x, y);
-		
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -16,12 +15,15 @@ public class TowerSaltMoving extends Tower
 		// TODO Auto-generated method stub
 		this.x = state.getMouseX();
 		this.y = state.getMouseY();
-		
-		if (state.getMouseClicked()) 
-		{
-			state.consumeClick();
-			state.addAnimatable(new TowerSalt(state, x, y));
-			state.removeAnimatable(this);
+
+		if (state.getMouseClicked()) {
+			if (state.getMoney() >= 50) {
+				state.consumeClick();
+				state.addAnimatable(new TowerSalt(state, x, y));
+				state.removeAnimatable(this);
+				state.changeMoney(-50);
+			}
+
 		}
 	}
 
@@ -30,6 +32,5 @@ public class TowerSaltMoving extends Tower
 		// TODO Auto-generated method stub
 		view.drawCenteredImage(g, "resources/salt.png", x, y);
 	}
-	
 
 }

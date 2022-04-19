@@ -78,6 +78,9 @@ public class GameControl implements Runnable, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		state.updateAll(1.0/60.0);
 		view.repaint();
+		
+		if (state.getGameOver() == true)
+			state.updateAll(0);
 	}
 
 	/**
