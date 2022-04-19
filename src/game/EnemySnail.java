@@ -14,13 +14,15 @@ public class EnemySnail extends Enemy
 	@Override
 	public void update(double timeElapsed) {
 		// TODO Auto-generated method stub
-		percentageTraveled += 0.01;
-		if (percentageTraveled > 1.0)
-			percentageTraveled = 0.0;
+		percentageTraveled += 0.0075;
+		if (percentageTraveled > 1.0) {
+			state.removeAnimatable(this);
+			state.changeLives(-1);
+		}
 		
 		//Split Snail into half
 		updateCount++;
-		if (updateCount == 60) {
+		if (updateCount == 30) {
 			EnemySnail s = new EnemySnail(state);
 			s.percentageTraveled = percentageTraveled - 0.01;
 			s.updateCount = 60;

@@ -13,9 +13,12 @@ public class EnemySCargo extends Enemy
 	@Override
 	public void update(double timeElapsed) {
 		// TODO Auto-generated method stub
-		percentageTraveled += 0.01;
-		if (percentageTraveled > 1.0)
-			percentageTraveled = 0.0;
+		percentageTraveled += 0.0115;
+		if (percentageTraveled > 1.0) {
+			state.removeAnimatable(this);
+			state.changeLives(-1);
+		}
+			
 		
 
 		

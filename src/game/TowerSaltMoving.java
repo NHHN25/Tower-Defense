@@ -7,14 +7,15 @@ public class TowerSaltMoving extends Tower
 
 	public TowerSaltMoving(GameState state, int x, int y) {
 		super(state, x, y);
+		
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void update(double timeElapsed) {
 		// TODO Auto-generated method stub
-		x = state.getMouseX();
-		y = state.getMouseY();
+		this.x = state.getMouseX();
+		this.y = state.getMouseY();
 		
 		if (state.getMouseClicked()) 
 		{

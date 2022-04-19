@@ -3,10 +3,11 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Menu implements Animatable {
+public class Menu extends Effects {
 	
 	private GameControl control;
 	private GameState state;
+
 	
 	public Menu (GameControl control, GameState state) {
 		this.control = control;
@@ -14,8 +15,6 @@ public class Menu implements Animatable {
 	}
 	
 	public void update(double timeElapsed) {
-		state.addAnimatable(new TowerSaltMenu(state, 650, 200));
-
 	}
 
 	public void draw(Graphics g, GameView view) {
@@ -24,6 +23,9 @@ public class Menu implements Animatable {
 		
 		g.setColor(Color.BLACK);
 		g.drawString("Lives: " + state.getLives(), 625, 100);
+		
+		state.addAnimatable(new TowerSaltMenu(state, 650, 200));
+
 
 	}
 		

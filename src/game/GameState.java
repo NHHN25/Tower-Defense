@@ -27,7 +27,7 @@ public class GameState implements MouseListener, MouseMotionListener{
 	private List<Animatable> toAdd; //Animatables to be added after updating animatables
 	private List<Animatable> toRemove; //Animatables to be remove after updating animatables
 	
-	private int mouseX, mouseY;
+	private int frameCount, mouseX, mouseY;
 	private boolean mouseClicked;
 	/* Contracts needed! */
 
@@ -98,6 +98,7 @@ public class GameState implements MouseListener, MouseMotionListener{
 			a.update(elapsedTime);
 		}
 		
+
 		//Add and remove animatables from the main animatable list
 		animatables.removeAll(toRemove);
 		animatables.addAll(toAdd);
@@ -107,16 +108,23 @@ public class GameState implements MouseListener, MouseMotionListener{
 		toAdd.clear();
 		toRemove.clear();
 		
+		
+		
 		//Clear mouse click
 		mouseClicked = false;
 		
-		//Generate random enemies
-		if (Math.random() < 0.1)
+		//Generate enemies systematically
+		if (frameCount == 10)
 			animatables.add(new EnemySnail(this));
 		
-		if (Math.random() < 0.025)
+		
+		if (frameCount == 20)
 			animatables.add(new EnemySCargo(this));
 		
+		if (frameCount == 60)
+			frameCount = 0;
+		
+		frameCount++;
 	}
 	
 	/**
@@ -135,26 +143,48 @@ public class GameState implements MouseListener, MouseMotionListener{
 		lives = lives + amount;
 	}
 	
+	/**
+	 * Get X coordinate of mouse
+	 * @return int mouseX
+	 */
 	public int getMouseX() {
 		return mouseX;
 	}
 	
+	/**
+	 * Get Y coordinate of mouse
+	 * @return int mouseY
+	 */
 	public int getMouseY() {
 		return mouseY;
 	}
 	
+	/**
+	 * Get status of mouse click
+	 * @return boolean mouseClicked
+	 */
 	public boolean getMouseClicked() {
 		return mouseClicked;
 	}
 	
+	/**
+	 * Set mouseClicked to false
+	 */
 	public void consumeClick() {
 		mouseClicked = false;
 	}
-	
+	/**
+	 * Add an animatable to the toAdd list
+	 * @param animatable
+	 */
 	public void addAnimatable (Animatable a) {
 		toAdd.add(a);
 	}
 	
+	/**
+	 * Add an animatable to the toAdd list
+	 * @param animatable
+	 */
 	public void removeAnimatable (Animatable a) {
 		toRemove.add(a);
 	}

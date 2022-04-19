@@ -19,7 +19,7 @@ public class TowerSaltMenu extends Tower
 			int dY = Math.abs(y - state.getMouseY());
 			
 			//Consume click and attach salt tower to mouse
-			if (dX < 40 && dY < 40) {
+			if (dX < 20 && dY < 20) {
 				state.consumeClick();
 				state.addAnimatable(new TowerSaltMoving(state, state.getMouseX(), state.getMouseY()));
 			}
