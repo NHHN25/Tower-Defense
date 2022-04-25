@@ -66,6 +66,9 @@ public class GameControl implements Runnable, ActionListener {
 		//Build background and menu
 		state.addAnimatable(new Background());
 		state.addAnimatable(new Menu(this, state));
+		//Draw Salt tower on menu
+		state.addAnimatable(new TowerSaltMenu(state, this, 650, 200));
+		state.addAnimatable(new TowerBeerMenu(state, this, 650, 300));
 		
 		//Add mouse listeners
 		view.addMouseListener(state);

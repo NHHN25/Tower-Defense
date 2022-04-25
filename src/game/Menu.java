@@ -16,6 +16,7 @@ public class Menu implements Animatable {
 	}
 	
 	public void update(double timeElapsed) {
+
 	}
 
 	public void draw(Graphics g, GameView view) {
@@ -37,9 +38,6 @@ public class Menu implements Animatable {
 		g.setColor(Color.BLACK);
 		g.drawString("Money left: " + state.getMoney(), 610, 125);
 		
-		//Draw Salt tower on menu
-		state.addAnimatable(new TowerSaltMenu(state, control, 650, 200));
-		state.addAnimatable(new TowerBeerMenu(state, control, 650, 300));
 		
 		//Draw Money
 		g.setColor(Color.BLACK);

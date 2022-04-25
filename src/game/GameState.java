@@ -134,6 +134,7 @@ public class GameState implements MouseListener, MouseMotionListener {
 		if (lives <= 0) {
 			isGameOver = true;
 		}
+		System.out.println(animatables);
 
 	}
 
