@@ -18,7 +18,7 @@ abstract public class Enemy implements Animatable
 	}
 	
 	public Point getLocation() {
-		location = path.locatePosition(percentageTraveled);
+		location = path.locate(percentageTraveled);
 		return location;
 	}
 

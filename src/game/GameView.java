@@ -59,5 +59,8 @@ public class GameView extends JPanel {
 		g.drawImage(img, x-img.getWidth()/2, y-img.getHeight()/2, null);
 		
 	}
-
+	public void drawCenteredAndSize (Graphics g, String name, int x, int y, int sizeX, int sizeY) {
+		BufferedImage img = control.loadImage(name);
+		g.drawImage(img, x-img.getWidth()/2, y-img.getHeight()/2, sizeX, sizeY,null);
+	}
 }

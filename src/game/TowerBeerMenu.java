@@ -2,10 +2,10 @@ package game;
 
 import java.awt.Graphics;
 
-public class TowerSaltMenu extends Tower 
+public class TowerBeerMenu extends Tower 
 {
 
-	public TowerSaltMenu(GameState state, GameControl control, int x, int y) {
+	public TowerBeerMenu(GameState state, GameControl control, int x, int y) {
 		super(state, control, x, y);
 		// TODO Auto-generated constructor stub
 	}
@@ -21,7 +21,7 @@ public class TowerSaltMenu extends Tower
 			//Consume click and attach salt tower to mouse
 			if (dX < 40 && dY < 40) {
 				state.consumeClick();
-				state.addAnimatable(new TowerSaltMoving(state, control, state.getMouseX(), state.getMouseY()));
+				state.addAnimatable(new TowerBeerMoving(state, control, state.getMouseX(), state.getMouseY()));
 			}
 		}
 	}
@@ -29,7 +29,7 @@ public class TowerSaltMenu extends Tower
 	@Override
 	public void draw(Graphics g, GameView view) {
 		// TODO Auto-generated method stub
-		view.drawCenteredImage(g, "resources/salt.png", x, y);
+		view.drawCenteredImage(g, "resources/beer.png", x, y);
 	}
 	
 

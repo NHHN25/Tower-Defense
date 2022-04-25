@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class EnemySCargo extends Enemy 
 {
@@ -13,7 +14,7 @@ public class EnemySCargo extends Enemy
 	@Override
 	public void update(double timeElapsed) {
 		// TODO Auto-generated method stub
-		percentageTraveled += 0.0115;
+		percentageTraveled += 0.04 * timeElapsed;
 		if (percentageTraveled > 1.0) {
 			//If reach the end, remove from list and deduct life
 			state.removeAnimatable(this);
@@ -30,11 +31,10 @@ public class EnemySCargo extends Enemy
 		// TODO Auto-generated method stub
 		
 		//Calculate the location of the snail on the path according to the percentage traveled
-		int intX = (int) this.getLocation().getX();
-		int intY = (int) this.getLocation().getY();
+		Point p = getLocation();
 		
 		//Draw the SCargo
-		view.drawCenteredImage(g, "resources/scargo.png", intX, intY);
+		view.drawCenteredImage(g, "resources/scargo.png", p.x, p.y);
 	}
 	
 

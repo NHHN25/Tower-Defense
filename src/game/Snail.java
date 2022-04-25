@@ -45,8 +45,8 @@ public class Snail implements Animatable {
 		path = state.getPath();
 		
 		//Calculate the location of the snail on the path according to the percentage traveled
-		int intX = (int) path.locatePosition(percentageTraveled).getX();
-		int intY = (int) path.locatePosition(percentageTraveled).getY();
+		int intX = (int) path.locate(percentageTraveled).getX();
+		int intY = (int) path.locate(percentageTraveled).getY();
 		
 		//Draw the snail
 		view.drawCenteredImage(g, "resources/snail.png", intX, intY);

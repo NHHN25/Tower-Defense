@@ -2,7 +2,11 @@ package game;
 
 import java.awt.Graphics;
 
-public class Background extends Effect {
+public class Background implements Animatable {
+	
+//	public Background(GameState state, int x, int y) {
+//		super(state, x, y);
+//	}
 	
 	public void update(double timeElapsed) {
 

@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class EnemySnail extends Enemy 
 {
@@ -14,8 +15,8 @@ public class EnemySnail extends Enemy
 	@Override
 	public void update(double timeElapsed) {
 		// TODO Auto-generated method stub
-		percentageTraveled += 0.0075;
-		if (percentageTraveled > 1.0) {
+		percentageTraveled += 0.02 * timeElapsed;
+		if (percentageTraveled >= 1.0) {
 			
 			//If reach the end, remove from list and deduct life
 			state.removeAnimatable(this);
@@ -23,13 +24,13 @@ public class EnemySnail extends Enemy
 		}
 		
 		//Split Snail into half
-//		updateCount++;
-//		if (updateCount == 30) {
-//			EnemySnail s = new EnemySnail(state);
-//			s.percentageTraveled = percentageTraveled - 0.01;
-//			s.updateCount = 60;
-//			state.addAnimatable(s);
-//		}
+		updateCount++;
+		if (updateCount == 30) {
+			EnemySnail s = new EnemySnail(state);
+			s.percentageTraveled = percentageTraveled - 0.01;
+			s.updateCount = 60;
+			state.addAnimatable(s);
+		}
 
 		
 	}
@@ -39,11 +40,10 @@ public class EnemySnail extends Enemy
 		// TODO Auto-generated method stub
 		
 		//Calculate the location of the snail on the path according to the percentage traveled
-		int intX = (int) this.getLocation().getX();
-		int intY = (int) this.getLocation().getY();
+		Point p = getLocation();
 		
 		//Draw the snail
-		view.drawCenteredImage(g, "resources/snail.png", intX, intY);
+		view.drawCenteredImage(g, "resources/snail.png", p.x, p.y);
 	}
 	
 

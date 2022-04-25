@@ -3,13 +3,14 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Menu extends Effect {
+public class Menu implements Animatable {
 	
 	private GameControl control;
 	private GameState state;
 
 	
 	public Menu (GameControl control, GameState state) {
+//		super(state, x , y);
 		this.control = control;
 		this.state = state;
 	}
@@ -19,6 +20,12 @@ public class Menu extends Effect {
 
 	public void draw(Graphics g, GameView view) {
 		g.clearRect(600, 0, 100, 600);
+		
+		//Draw the menu rectangle
+		g.setColor(Color.WHITE);
+		g.drawRect(600, 0, 100, 600);
+		
+		//Draw word Menu
 		g.setColor(Color.BLACK);
 		g.drawString("Menu", 640, 50);
 		
@@ -31,11 +38,13 @@ public class Menu extends Effect {
 		g.drawString("Money left: " + state.getMoney(), 610, 125);
 		
 		//Draw Salt tower on menu
-		state.addAnimatable(new TowerSaltMenu(state, 650, 200));
+		state.addAnimatable(new TowerSaltMenu(state, control, 650, 200));
+		state.addAnimatable(new TowerBeerMenu(state, control, 650, 300));
 		
 		//Draw Money
 		g.setColor(Color.BLACK);
 		g.drawString("Cost: 50", 630, 250);
+		g.drawString("Cost: 100", 630, 350);
 		
 
 

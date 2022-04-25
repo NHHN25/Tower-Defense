@@ -27,6 +27,7 @@ public class GameControl implements Runnable, ActionListener {
 	private GameState state;
 	private Timer timer;
 	private Map<String, BufferedImage> images;
+	private long previousTime;
 
 	// Constructor
 
@@ -70,13 +71,21 @@ public class GameControl implements Runnable, ActionListener {
 		view.addMouseListener(state);
 		view.addMouseMotionListener(state);
 		
+		//Iniatilize the previous time
+		previousTime = System.currentTimeMillis();
+		
 		// Initialize a timer
-		timer = new Timer(16, this);
+		timer = new Timer(32, this);
 		timer.start();
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		state.updateAll(1.0/60.0);
+	public void actionPerformed(ActionEvent e)
+	{
+		
+		long currentTime  = System.currentTimeMillis();
+		double elapsedTime = (currentTime - previousTime) / 1000.0;
+		previousTime = currentTime;
+		state.updateAll(elapsedTime);
 		view.repaint();
 		
 	}
