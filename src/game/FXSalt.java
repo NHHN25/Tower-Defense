@@ -25,6 +25,7 @@ public class FXSalt extends FX implements Animatable {
 	@Override
 	public void update(double timeElapsed) {
 		
+		//Remove salt effect if it stayed too long on the screen
 		age += timeElapsed;
 		if (age > 0.75)
 		{
@@ -32,13 +33,16 @@ public class FXSalt extends FX implements Animatable {
 			return;
 		}
 		
+		//Shoot the salt towards EnemySnail object
 		x = x + deltaX*6 * timeElapsed;
-		y = y + deltaX*6 * timeElapsed;
+		y = y + deltaY*6 * timeElapsed;
 		
 		Point p = new Point ((int)x, (int)y);
 		
+		//Retrieve location of the snail
 		EnemySnail e = state.findNearestEnemySnail(p.x, p.y);
 		
+		//If EnemySnail is within a certain distance to the salt, remove it from the list and increment money
 		if (e.getLocation().distance(p) < 30)
 		{
 			state.removeAnimatable(e);

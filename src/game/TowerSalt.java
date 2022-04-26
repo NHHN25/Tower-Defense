@@ -24,12 +24,17 @@ public class TowerSalt extends Tower
 		EnemySnail e = state.findNearestEnemySnail(x, y);
 		Point p = new Point(x,y);
 		
+		try {
 		int deltaX = e.getLocation().x - x;
 		int deltaY = e.getLocation().y - y;
 		
-		if(e.getLocation().distance(p) < 120)
+		if(e.getLocation().distance(p) < 90)
 			state.addAnimatable(new FXSalt(state, x, y, deltaX, deltaY));
 			timeSinceLastShot = 0;
+		} catch (NullPointerException n) {
+			System.out.println("No snail found.");
+		}
+
 	}
 
 	@Override

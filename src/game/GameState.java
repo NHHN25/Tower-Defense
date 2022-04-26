@@ -30,7 +30,7 @@ public class GameState implements MouseListener, MouseMotionListener {
 	private List<Animatable> toRemove; // Animatables to be remove after updating animatables
 
 	private int frameCount, mouseX, mouseY, money;
-	private boolean mouseClicked, isGameOver;
+	private boolean mouseClicked, isGameOver, startGame;
 	/* Contracts needed! */
 
 	// Constructor
@@ -39,7 +39,7 @@ public class GameState implements MouseListener, MouseMotionListener {
 		System.out.println("GameState constructor");
 
 		// Initialize lives and money
-		money = 200;
+		money = 400;
 		lives = 10;
 
 		// Build animatable list
@@ -93,7 +93,6 @@ public class GameState implements MouseListener, MouseMotionListener {
 	 * or not.
 	 */
 	public void updateAll(double elapsedTime) {
-
 		// Loop through all animatables
 		for (Animatable a : animatables) {
 			// Stop the game if out of lives
@@ -115,15 +114,22 @@ public class GameState implements MouseListener, MouseMotionListener {
 		toRemove.clear();
 
 		// Clear mouse click
-//		mouseClicked = false;
+		mouseClicked = false;
 
 		// Generate enemies systematically
 		if (frameCount == 10)
 			animatables.add(new EnemySnail(this));
 
-//		if (frameCount == 20)
-//			animatables.add(new EnemySCargo(this));
-//
+		if (frameCount == 20)
+			animatables.add(new EnemySCargo(this));
+		
+		if (frameCount == 40) {
+			animatables.add(new EnemySCargo(this));
+			animatables.add(new EnemySnail(this));
+			animatables.add(new EnemySnail(this));
+		}
+
+
 		if (frameCount == 60)
 			frameCount = 0;
 
@@ -134,7 +140,7 @@ public class GameState implements MouseListener, MouseMotionListener {
 		if (lives <= 0) {
 			isGameOver = true;
 		}
-		System.out.println(animatables);
+//		System.out.println(animatables);
 
 	}
 
@@ -209,6 +215,15 @@ public class GameState implements MouseListener, MouseMotionListener {
 	public boolean getGameOver() {
 		return isGameOver;
 	}
+	
+	/**
+	 * Return whether the game is started or not
+	 * 
+	 * @return True or False
+	 */
+	public boolean getGameStart() {
+		return startGame;
+	}
 
 	/**
 	 * Set mouseClicked to false
@@ -252,6 +267,7 @@ public class GameState implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+//		mouseClicked = true;
 
 	}
 
@@ -259,6 +275,7 @@ public class GameState implements MouseListener, MouseMotionListener {
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		mouseClicked = true;
+		startGame = true;
 	}
 
 	@Override

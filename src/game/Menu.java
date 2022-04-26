@@ -43,6 +43,7 @@ public class Menu implements Animatable {
 		g.setColor(Color.BLACK);
 		g.drawString("Cost: 50", 630, 250);
 		g.drawString("Cost: 100", 630, 350);
+		g.drawString("Cost: 500", 630, 450);
 		
 
 

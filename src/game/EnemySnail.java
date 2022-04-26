@@ -15,7 +15,7 @@ public class EnemySnail extends Enemy
 	@Override
 	public void update(double timeElapsed) {
 		// TODO Auto-generated method stub
-		percentageTraveled += 0.02 * timeElapsed;
+		percentageTraveled += 0.050 * timeElapsed;
 		if (percentageTraveled >= 1.0) {
 			
 			//If reach the end, remove from list and deduct life

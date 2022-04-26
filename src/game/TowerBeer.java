@@ -28,7 +28,7 @@ public class TowerBeer extends Tower
 		int deltaX = e.getLocation().x - x;
 		int deltaY = e.getLocation().y - y;
 		
-		if(e.getLocation().distance(p) < 110)
+		if(e.getLocation().distance(p) < 90)
 			state.addAnimatable(new FXPuddle(state, x, y, deltaX, deltaY));
 			timeSinceLastShot = 0;
 	}

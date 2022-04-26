@@ -21,7 +21,7 @@ public class FXCrash extends FX implements Animatable {
 
 	@Override
 	public void draw(Graphics g, GameView view) {
-		view.drawCenteredAndSize(g, "resources/crash.png", (int)x, (int)y , (int)(200* age), (int)(200* age));
+		view.drawCenteredAndSize(g, "resources/crash.png", (int)x, (int)y , 60, 60);
 
 	}
 

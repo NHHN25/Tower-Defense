@@ -69,6 +69,7 @@ public class GameControl implements Runnable, ActionListener {
 		//Draw Salt tower on menu
 		state.addAnimatable(new TowerSaltMenu(state, this, 650, 200));
 		state.addAnimatable(new TowerBeerMenu(state, this, 650, 300));
+		state.addAnimatable(new TowerTurretMenu(state, this, 650, 400));
 		
 		//Add mouse listeners
 		view.addMouseListener(state);
@@ -84,12 +85,14 @@ public class GameControl implements Runnable, ActionListener {
 
 	public void actionPerformed(ActionEvent e)
 	{
-		
-		long currentTime  = System.currentTimeMillis();
-		double elapsedTime = (currentTime - previousTime) / 1000.0;
-		previousTime = currentTime;
-		state.updateAll(elapsedTime);
-		view.repaint();
+		if (state.getGameStart()) {
+			long currentTime = System.currentTimeMillis();
+			double elapsedTime = (currentTime - previousTime) / 1000.0;
+			previousTime = currentTime;
+			state.updateAll(elapsedTime);
+			view.repaint();
+		} else 
+			return;
 		
 	}
 
